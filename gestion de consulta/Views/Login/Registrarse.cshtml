@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Registrarse";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="main-page signup-page">
+        <h2 class="title1">Registrese aqui</h2>
+        <div class="sign-up-row widget-shadow">
+            <h5>Informacion Personal :</h5>
+            <form>
+                <div class="sign-u">
+                    <input type="text" name="firstname" placeholder="Nombres" required="">
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="sign-u">
+                    <input type="text" placeholder="Apellidos" required="">
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="sign-u">
+                    <input type="email" placeholder="Correo Electronico" required="">
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="sign-u">
+                    <div class="sign-up1">
+                        <h4>Sexo* :</h4>
+                    </div>
+                    <div class="sign-up2">
+                        <label>
+                            <input type="radio" name="Gender" required="">
+                            Masculino
+                        </label>
+                        <label>
+                            <input type="radio" name="Gender" required="">
+                            Femenino
+                        </label>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <h6>Informacion de sesion :</h6>
+                <div class="sign-u">
+                    <input type="password" placeholder="Contraseña" required="">
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="sign-u">
+                    <input type="password" placeholder="Confirmar Contraseña" required="">
+                </div>
+                <div class="clearfix"> </div>
+                <div class="sub_home">
+                    <input type="submit" value="Enviar">
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="registration">
+                    Ya estas registrado.
+                    <a class="">
+                        @Html.ActionLink("Inicia sesion", "Login")
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
