@@ -12,14 +12,11 @@ namespace gestion_de_consulta.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class usuarios
+    public partial class servicio_historia
     {
         public int id { get; set; }
-        public Nullable<int> cedula { get; set; }
-        public string nombres { get; set; }
-        public string apellidos { get; set; }
-        public string clave { get; set; }
-        public string telefono { get; set; }
-        public Nullable<int> id_rol { get; set; }
+        public Nullable<int> codigo_servicio { get; set; }
+        public Nullable<int> cedula_paciente { get; set; }
+        public string fecha_servicio { get; set; }
     }
 }

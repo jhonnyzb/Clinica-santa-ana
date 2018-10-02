@@ -114,7 +114,24 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <EntityDeploy Include="Models\bd_clinica.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>bd_clinica.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\bd_clinica.edmx.diagram">
+      <DependentUpon>bd_clinica.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Models\bd_clinica.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>bd_clinica.edmx</DependentUpon>
+      <LastGenOutput>bd_clinica.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\bd_clinica.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>bd_clinica.edmx</DependentUpon>
+      <LastGenOutput>bd_clinica.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -132,6 +149,48 @@
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\bd_clinica.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>bd_clinica.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\bd_clinica.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>bd_clinica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\bd_clinica.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>bd_clinica.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\citas.cs">
+      <DependentUpon>bd_clinica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\historial_clinico.cs">
+      <DependentUpon>bd_clinica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\horarios.cs">
+      <DependentUpon>bd_clinica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\medicamentos.cs">
+      <DependentUpon>bd_clinica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\medicamentos_historia.cs">
+      <DependentUpon>bd_clinica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\roles.cs">
+      <DependentUpon>bd_clinica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\servicios.cs">
+      <DependentUpon>bd_clinica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\servicio_historia.cs">
+      <DependentUpon>bd_clinica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\usuarios.cs">
+      <DependentUpon>bd_clinica.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -153,7 +212,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

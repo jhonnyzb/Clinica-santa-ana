@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="bd_clinicaModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="citas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cedula_usuario" Type="int" />
+          <Property Name="id_horario" Type="int" />
+          <Property Name="estado_cita" Type="int" />
+          <Property Name="medico" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="historial_clinico">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cedula_paciente" Type="int" />
+          <Property Name="antecedentes_familiares" Type="text" />
+          <Property Name="antecedentes_personales" Type="text" />
+          <Property Name="cirugias" Type="text" />
+          <Property Name="alergias" Type="text" />
+          <Property Name="enfermedades_cronicas" Type="text" />
+          <Property Name="fecha_novedad" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="horarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cedula_medico" Type="int" />
+          <Property Name="fecha_horario" Type="varchar" MaxLength="50" />
+          <Property Name="horario" Type="varchar" MaxLength="50" />
+          <Property Name="estado_horario" Type="int" />
+        </EntityType>
+        <EntityType Name="medicamentos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigo_medicamento" Type="varchar" MaxLength="50" />
+          <Property Name="descripcion" Type="text" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="stock" Type="int" />
+          <Property Name="valor_costo_medicamento" Type="int" />
+          <Property Name="precio_publico" Type="int" />
+        </EntityType>
+        <EntityType Name="medicamentos_historia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigo_medicamento" Type="varchar" MaxLength="50" />
+          <Property Name="cedula_paciente" Type="int" />
+          <Property Name="fecha_medicamento" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="servicio_historia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigo_servicio" Type="int" />
+          <Property Name="cedula_paciente" Type="int" />
+          <Property Name="fecha_servicio" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="servicios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigo_servicio" Type="varchar" MaxLength="50" />
+          <Property Name="nombre_servicio" Type="varchar" MaxLength="50" />
+          <Property Name="valor_costo_servicio" Type="int" />
+          <Property Name="valor_venta_servicio" Type="int" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cedula" Type="int" />
+          <Property Name="nombres" Type="varchar" MaxLength="50" />
+          <Property Name="apellidos" Type="varchar" MaxLength="50" />
+          <Property Name="clave" Type="varchar" MaxLength="50" />
+          <Property Name="telefono" Type="varchar" MaxLength="50" />
+          <Property Name="id_rol" Type="int" />
+        </EntityType>
+        <EntityContainer Name="bd_clinicaModelStoreContainer">
+          <EntitySet Name="citas" EntityType="Self.citas" Schema="bd_clinica" store:Type="Tables" />
+          <EntitySet Name="historial_clinico" EntityType="Self.historial_clinico" Schema="bd_clinica" store:Type="Tables" />
+          <EntitySet Name="horarios" EntityType="Self.horarios" Schema="bd_clinica" store:Type="Tables" />
+          <EntitySet Name="medicamentos" EntityType="Self.medicamentos" Schema="bd_clinica" store:Type="Tables" />
+          <EntitySet Name="medicamentos_historia" EntityType="Self.medicamentos_historia" Schema="bd_clinica" store:Type="Tables" />
+          <EntitySet Name="roles" EntityType="Self.roles" Schema="bd_clinica" store:Type="Tables" />
+          <EntitySet Name="servicio_historia" EntityType="Self.servicio_historia" Schema="bd_clinica" store:Type="Tables" />
+          <EntitySet Name="servicios" EntityType="Self.servicios" Schema="bd_clinica" store:Type="Tables" />
+          <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="bd_clinica" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bd_clinicaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="citas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cedula_usuario" Type="Int32" />
+          <Property Name="id_horario" Type="Int32" />
+          <Property Name="estado_cita" Type="Int32" />
+          <Property Name="medico" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="historial_clinico">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cedula_paciente" Type="Int32" />
+          <Property Name="antecedentes_familiares" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="antecedentes_personales" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="cirugias" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="alergias" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="enfermedades_cronicas" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_novedad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="horarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cedula_medico" Type="Int32" />
+          <Property Name="fecha_horario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="horario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="estado_horario" Type="Int32" />
+        </EntityType>
+        <EntityType Name="medicamentos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigo_medicamento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="stock" Type="Int32" />
+          <Property Name="valor_costo_medicamento" Type="Int32" />
+          <Property Name="precio_publico" Type="Int32" />
+        </EntityType>
+        <EntityType Name="medicamentos_historia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigo_medicamento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cedula_paciente" Type="Int32" />
+          <Property Name="fecha_medicamento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="servicio_historia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigo_servicio" Type="Int32" />
+          <Property Name="cedula_paciente" Type="Int32" />
+          <Property Name="fecha_servicio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="servicios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigo_servicio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nombre_servicio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="valor_costo_servicio" Type="Int32" />
+          <Property Name="valor_venta_servicio" Type="Int32" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cedula" Type="Int32" />
+          <Property Name="nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_rol" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="bd_clinicaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="citas" EntityType="Self.citas" />
+          <EntitySet Name="historial_clinico" EntityType="Self.historial_clinico" />
+          <EntitySet Name="horarios" EntityType="Self.horarios" />
+          <EntitySet Name="medicamentos" EntityType="Self.medicamentos" />
+          <EntitySet Name="medicamentos_historia" EntityType="Self.medicamentos_historia" />
+          <EntitySet Name="roles" EntityType="Self.roles" />
+          <EntitySet Name="servicio_historia" EntityType="Self.servicio_historia" />
+          <EntitySet Name="servicios" EntityType="Self.servicios" />
+          <EntitySet Name="usuarios" EntityType="Self.usuarios" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bd_clinicaModelStoreContainer" CdmEntityContainer="bd_clinicaEntities">
+          <EntitySetMapping Name="citas">
+            <EntityTypeMapping TypeName="bd_clinicaModel.citas">
+              <MappingFragment StoreEntitySet="citas">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cedula_usuario" ColumnName="cedula_usuario" />
+                <ScalarProperty Name="id_horario" ColumnName="id_horario" />
+                <ScalarProperty Name="estado_cita" ColumnName="estado_cita" />
+                <ScalarProperty Name="medico" ColumnName="medico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="historial_clinico">
+            <EntityTypeMapping TypeName="bd_clinicaModel.historial_clinico">
+              <MappingFragment StoreEntitySet="historial_clinico">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cedula_paciente" ColumnName="cedula_paciente" />
+                <ScalarProperty Name="antecedentes_familiares" ColumnName="antecedentes_familiares" />
+                <ScalarProperty Name="antecedentes_personales" ColumnName="antecedentes_personales" />
+                <ScalarProperty Name="cirugias" ColumnName="cirugias" />
+                <ScalarProperty Name="alergias" ColumnName="alergias" />
+                <ScalarProperty Name="enfermedades_cronicas" ColumnName="enfermedades_cronicas" />
+                <ScalarProperty Name="fecha_novedad" ColumnName="fecha_novedad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="horarios">
+            <EntityTypeMapping TypeName="bd_clinicaModel.horarios">
+              <MappingFragment StoreEntitySet="horarios">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cedula_medico" ColumnName="cedula_medico" />
+                <ScalarProperty Name="fecha_horario" ColumnName="fecha_horario" />
+                <ScalarProperty Name="horario" ColumnName="horario" />
+                <ScalarProperty Name="estado_horario" ColumnName="estado_horario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="medicamentos">
+            <EntityTypeMapping TypeName="bd_clinicaModel.medicamentos">
+              <MappingFragment StoreEntitySet="medicamentos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="codigo_medicamento" ColumnName="codigo_medicamento" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="stock" ColumnName="stock" />
+                <ScalarProperty Name="valor_costo_medicamento" ColumnName="valor_costo_medicamento" />
+                <ScalarProperty Name="precio_publico" ColumnName="precio_publico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="medicamentos_historia">
+            <EntityTypeMapping TypeName="bd_clinicaModel.medicamentos_historia">
+              <MappingFragment StoreEntitySet="medicamentos_historia">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="codigo_medicamento" ColumnName="codigo_medicamento" />
+                <ScalarProperty Name="cedula_paciente" ColumnName="cedula_paciente" />
+                <ScalarProperty Name="fecha_medicamento" ColumnName="fecha_medicamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="bd_clinicaModel.roles">
+              <MappingFragment StoreEntitySet="roles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="servicio_historia">
+            <EntityTypeMapping TypeName="bd_clinicaModel.servicio_historia">
+              <MappingFragment StoreEntitySet="servicio_historia">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="codigo_servicio" ColumnName="codigo_servicio" />
+                <ScalarProperty Name="cedula_paciente" ColumnName="cedula_paciente" />
+                <ScalarProperty Name="fecha_servicio" ColumnName="fecha_servicio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="servicios">
+            <EntityTypeMapping TypeName="bd_clinicaModel.servicios">
+              <MappingFragment StoreEntitySet="servicios">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="codigo_servicio" ColumnName="codigo_servicio" />
+                <ScalarProperty Name="nombre_servicio" ColumnName="nombre_servicio" />
+                <ScalarProperty Name="valor_costo_servicio" ColumnName="valor_costo_servicio" />
+                <ScalarProperty Name="valor_venta_servicio" ColumnName="valor_venta_servicio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="bd_clinicaModel.usuarios">
+              <MappingFragment StoreEntitySet="usuarios">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

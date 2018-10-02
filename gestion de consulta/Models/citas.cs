@@ -12,14 +12,12 @@ namespace gestion_de_consulta.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class usuarios
+    public partial class citas
     {
         public int id { get; set; }
-        public Nullable<int> cedula { get; set; }
-        public string nombres { get; set; }
-        public string apellidos { get; set; }
-        public string clave { get; set; }
-        public string telefono { get; set; }
-        public Nullable<int> id_rol { get; set; }
+        public Nullable<int> cedula_usuario { get; set; }
+        public Nullable<int> id_horario { get; set; }
+        public Nullable<int> estado_cita { get; set; }
+        public string medico { get; set; }
     }
 }
