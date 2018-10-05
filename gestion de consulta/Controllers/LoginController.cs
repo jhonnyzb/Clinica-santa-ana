@@ -11,18 +11,15 @@ namespace gestion_de_consulta.Controllers
         // GET: Login
         public ActionResult Login()
         {
+
             return View();
         }
-
-
-        public ActionResult Registrarse()
+        
+        public ActionResult Cerrar_sesion()
         {
+
             return View();
         }
 
-        public ActionResult Recuperarcontraseña()
-        {
-            return View();
-        }
     }
 }

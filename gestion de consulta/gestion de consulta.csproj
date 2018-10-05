@@ -121,6 +121,7 @@
     <Content Include="Models\bd_clinica.edmx.diagram">
       <DependentUpon>bd_clinica.edmx</DependentUpon>
     </Content>
+    <Content Include="ClassDiagram5.cd" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Models\bd_clinica.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -138,15 +139,16 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\jquery.easing.min.js" />
+    <Content Include="Scripts\paciente.js" />
     <Content Include="Scripts\sb-admin.min.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Shared\_LayoutUsuario.cshtml" />
-    <Content Include="Views\Usuario\Paciente.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccesoDatos\AccesoDatosPaciente.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\PacienteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -199,10 +201,10 @@
     <None Include="packages.config" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Views\Login\Registrarse.cshtml" />
-    <Content Include="Views\Login\Recuperarcontraseña.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Views\Paciente\Registro.cshtml" />
+    <Content Include="Views\Paciente\Recuperar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

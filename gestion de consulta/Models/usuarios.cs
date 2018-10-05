@@ -21,5 +21,6 @@ namespace gestion_de_consulta.Models
         public string clave { get; set; }
         public string telefono { get; set; }
         public Nullable<int> id_rol { get; set; }
+        public string correo { get; set; }
     }
 }
