@@ -11,6 +11,14 @@ namespace gestion_de_consulta.Controllers
     public class PacienteController : Controller
     {
         // GET: Usuario
+        public ActionResult Inicio()
+        {
+         
+                return View();  
+            
+        }
+
+
         public ActionResult Registro()
         {
             return View();

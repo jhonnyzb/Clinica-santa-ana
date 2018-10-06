@@ -121,7 +121,6 @@
     <Content Include="Models\bd_clinica.edmx.diagram">
       <DependentUpon>bd_clinica.edmx</DependentUpon>
     </Content>
-    <Content Include="ClassDiagram5.cd" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Models\bd_clinica.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -139,15 +138,20 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\jquery.easing.min.js" />
+    <Content Include="Scripts\Login.js" />
     <Content Include="Scripts\paciente.js" />
     <Content Include="Scripts\sb-admin.min.js" />
     <Content Include="Web.config" />
-    <Content Include="Views\Shared\_LayoutUsuario.cshtml" />
+    <Content Include="Views\Shared\_LayoutPaciente.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccesoDatos\Acceso_Datos.cs" />
     <Compile Include="AccesoDatos\AccesoDatosPaciente.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdministradorController.cs" />
+    <Compile Include="Controllers\FuncionarioController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MedicoController.cs" />
     <Compile Include="Controllers\PacienteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -205,6 +209,13 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Views\Paciente\Registro.cshtml" />
     <Content Include="Views\Paciente\Recuperar.cshtml" />
+    <Content Include="Views\Shared\_LayoutMedico.cshtml" />
+    <Content Include="Views\Shared\_LayoutFuncionario.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdministrador.cshtml" />
+    <Content Include="Views\Paciente\Inicio.cshtml" />
+    <Content Include="Views\Medico\Inicio.cshtml" />
+    <Content Include="Views\Funcionario\Inicio.cshtml" />
+    <Content Include="Views\Administrador\Inicio.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

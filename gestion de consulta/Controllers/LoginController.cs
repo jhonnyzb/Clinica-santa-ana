@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using gestion_de_consulta.Models;
+using gestion_de_consulta.AccesoDatos;
+
 
 namespace gestion_de_consulta.Controllers
 {
@@ -14,11 +17,30 @@ namespace gestion_de_consulta.Controllers
 
             return View();
         }
+
         
+        [HttpPost]
+        public JsonResult Login(usuarios usuario)
+        {
+            Acceso_Datos acclogin = new Acceso_Datos();
+            usuarios l_usuario = acclogin.Logueo(usuario);
+            string v_resultado = "no existe";
+            if (l_usuario !=null)
+            {
+                Session["Nom_usuario"] = l_usuario.nombres;
+                v_resultado = l_usuario.id_rol.ToString();
+            }
+
+            return Json(v_resultado, JsonRequestBehavior.AllowGet);
+        }
+
+
+
         public ActionResult Cerrar_sesion()
         {
-
-            return View();
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Login", "Login");
         }
 
     }
