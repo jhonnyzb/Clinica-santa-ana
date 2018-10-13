@@ -14,10 +14,16 @@ namespace gestion_de_consulta.Models
     
     public partial class servicios
     {
-        public int id { get; set; }
+        public servicios()
+        {
+            this.servicio_historia = new HashSet<servicio_historia>();
+        }
+    
         public string codigo_servicio { get; set; }
         public string nombre_servicio { get; set; }
         public Nullable<int> valor_costo_servicio { get; set; }
         public Nullable<int> valor_venta_servicio { get; set; }
+    
+        public virtual ICollection<servicio_historia> servicio_historia { get; set; }
     }
 }

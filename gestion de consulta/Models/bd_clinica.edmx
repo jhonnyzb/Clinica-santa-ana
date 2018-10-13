@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="bd_clinicaModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="bd_clinicaModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="citas">
           <Key>
             <PropertyRef Name="id" />
@@ -17,16 +17,17 @@
         </EntityType>
         <EntityType Name="historial_clinico">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="cedula_paciente" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="cedula_paciente" Type="int" />
+          <Property Name="id" Type="int" />
+          <Property Name="cedula_paciente" Type="int" Nullable="false" />
           <Property Name="antecedentes_familiares" Type="text" />
           <Property Name="antecedentes_personales" Type="text" />
           <Property Name="cirugias" Type="text" />
           <Property Name="alergias" Type="text" />
           <Property Name="enfermedades_cronicas" Type="text" />
           <Property Name="fecha_novedad" Type="varchar" MaxLength="50" />
+          <Property Name="motivo_consulta" Type="text" />
         </EntityType>
         <EntityType Name="horarios">
           <Key>
@@ -40,10 +41,9 @@
         </EntityType>
         <EntityType Name="medicamentos">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="codigo_medicamento" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="codigo_medicamento" Type="varchar" MaxLength="50" />
+          <Property Name="codigo_medicamento" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="descripcion" Type="text" />
           <Property Name="nombre" Type="varchar" MaxLength="50" />
           <Property Name="stock" Type="int" />
@@ -71,26 +71,25 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="codigo_servicio" Type="int" />
+          <Property Name="codigo_servicio1" Type="varchar" MaxLength="50" />
           <Property Name="cedula_paciente" Type="int" />
           <Property Name="fecha_servicio" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="servicios">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="codigo_servicio" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="codigo_servicio" Type="varchar" MaxLength="50" />
+          <Property Name="codigo_servicio" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="nombre_servicio" Type="varchar" MaxLength="50" />
           <Property Name="valor_costo_servicio" Type="int" />
           <Property Name="valor_venta_servicio" Type="int" />
         </EntityType>
         <EntityType Name="usuarios">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="cedula" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="cedula" Type="int" />
+          <Property Name="id" Type="int" />
+          <Property Name="cedula" Type="int" Nullable="false" />
           <Property Name="nombres" Type="varchar" MaxLength="50" />
           <Property Name="apellidos" Type="varchar" MaxLength="50" />
           <Property Name="clave" Type="varchar" MaxLength="50" />
@@ -98,6 +97,102 @@
           <Property Name="id_rol" Type="int" />
           <Property Name="correo" Type="varchar" MaxLength="50" />
         </EntityType>
+        <Association Name="FK_citas">
+          <End Role="horarios" Type="Self.horarios" Multiplicity="0..1" />
+          <End Role="citas" Type="Self.citas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="horarios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="citas">
+              <PropertyRef Name="id_horario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_citas_usuarios">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="0..1" />
+          <End Role="citas" Type="Self.citas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="citas">
+              <PropertyRef Name="cedula_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_historial_usuario">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="historial_clinico" Type="Self.historial_clinico" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="historial_clinico">
+              <PropertyRef Name="cedula_paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_medicamentos_historia">
+          <End Role="medicamentos" Type="Self.medicamentos" Multiplicity="0..1" />
+          <End Role="medicamentos_historia" Type="Self.medicamentos_historia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medicamentos">
+              <PropertyRef Name="codigo_medicamento" />
+            </Principal>
+            <Dependent Role="medicamentos_historia">
+              <PropertyRef Name="codigo_medicamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_medicamentos_historia_historial">
+          <End Role="historial_clinico" Type="Self.historial_clinico" Multiplicity="0..1" />
+          <End Role="medicamentos_historia" Type="Self.medicamentos_historia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="historial_clinico">
+              <PropertyRef Name="cedula_paciente" />
+            </Principal>
+            <Dependent Role="medicamentos_historia">
+              <PropertyRef Name="cedula_paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_servicio_historial">
+          <End Role="historial_clinico" Type="Self.historial_clinico" Multiplicity="0..1" />
+          <End Role="servicio_historia" Type="Self.servicio_historia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="historial_clinico">
+              <PropertyRef Name="cedula_paciente" />
+            </Principal>
+            <Dependent Role="servicio_historia">
+              <PropertyRef Name="cedula_paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_servicio_servicio">
+          <End Role="servicios" Type="Self.servicios" Multiplicity="0..1" />
+          <End Role="servicio_historia" Type="Self.servicio_historia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="servicios">
+              <PropertyRef Name="codigo_servicio" />
+            </Principal>
+            <Dependent Role="servicio_historia">
+              <PropertyRef Name="codigo_servicio1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuarios_roles">
+          <End Role="roles" Type="Self.roles" Multiplicity="0..1" />
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="id_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="bd_clinicaModelStoreContainer">
           <EntitySet Name="citas" EntityType="Self.citas" Schema="bd_clinica" store:Type="Tables" />
           <EntitySet Name="historial_clinico" EntityType="Self.historial_clinico" Schema="bd_clinica" store:Type="Tables" />
@@ -108,8 +203,41 @@
           <EntitySet Name="servicio_historia" EntityType="Self.servicio_historia" Schema="bd_clinica" store:Type="Tables" />
           <EntitySet Name="servicios" EntityType="Self.servicios" Schema="bd_clinica" store:Type="Tables" />
           <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="bd_clinica" store:Type="Tables" />
+          <AssociationSet Name="FK_citas" Association="Self.FK_citas">
+            <End Role="horarios" EntitySet="horarios" />
+            <End Role="citas" EntitySet="citas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_citas_usuarios" Association="Self.FK_citas_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="citas" EntitySet="citas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_historial_usuario" Association="Self.FK_historial_usuario">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="historial_clinico" EntitySet="historial_clinico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_medicamentos_historia" Association="Self.FK_medicamentos_historia">
+            <End Role="medicamentos" EntitySet="medicamentos" />
+            <End Role="medicamentos_historia" EntitySet="medicamentos_historia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_medicamentos_historia_historial" Association="Self.FK_medicamentos_historia_historial">
+            <End Role="historial_clinico" EntitySet="historial_clinico" />
+            <End Role="medicamentos_historia" EntitySet="medicamentos_historia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_servicio_historial" Association="Self.FK_servicio_historial">
+            <End Role="historial_clinico" EntitySet="historial_clinico" />
+            <End Role="servicio_historia" EntitySet="servicio_historia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_servicio_servicio" Association="Self.FK_servicio_servicio">
+            <End Role="servicios" EntitySet="servicios" />
+            <End Role="servicio_historia" EntitySet="servicio_historia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuarios_roles" Association="Self.FK_usuarios_roles">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="bd_clinicaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -122,19 +250,25 @@
           <Property Name="id_horario" Type="Int32" />
           <Property Name="estado_cita" Type="Int32" />
           <Property Name="medico" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="horarios" Relationship="Self.FK_citas" FromRole="citas" ToRole="horarios" />
+          <NavigationProperty Name="usuarios" Relationship="Self.FK_citas_usuarios" FromRole="citas" ToRole="usuarios" />
         </EntityType>
         <EntityType Name="historial_clinico">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="cedula_paciente" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cedula_paciente" Type="Int32" />
+          <Property Name="id" Type="Int32" />
+          <Property Name="cedula_paciente" Type="Int32" Nullable="false" />
           <Property Name="antecedentes_familiares" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="antecedentes_personales" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="cirugias" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="alergias" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="enfermedades_cronicas" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="fecha_novedad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="motivo_consulta" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="usuarios" Relationship="Self.FK_historial_usuario" FromRole="historial_clinico" ToRole="usuarios" />
+          <NavigationProperty Name="medicamentos_historia" Relationship="Self.FK_medicamentos_historia_historial" FromRole="historial_clinico" ToRole="medicamentos_historia" />
+          <NavigationProperty Name="servicio_historia" Relationship="Self.FK_servicio_historial" FromRole="historial_clinico" ToRole="servicio_historia" />
         </EntityType>
         <EntityType Name="horarios">
           <Key>
@@ -145,18 +279,19 @@
           <Property Name="fecha_horario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="horario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="estado_horario" Type="Int32" />
+          <NavigationProperty Name="citas" Relationship="Self.FK_citas" FromRole="horarios" ToRole="citas" />
         </EntityType>
         <EntityType Name="medicamentos">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="codigo_medicamento" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="codigo_medicamento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="codigo_medicamento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="descripcion" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="stock" Type="Int32" />
           <Property Name="valor_costo_medicamento" Type="Int32" />
           <Property Name="precio_publico" Type="Int32" />
+          <NavigationProperty Name="medicamentos_historia" Relationship="Self.FK_medicamentos_historia" FromRole="medicamentos" ToRole="medicamentos_historia" />
         </EntityType>
         <EntityType Name="medicamentos_historia">
           <Key>
@@ -166,6 +301,8 @@
           <Property Name="codigo_medicamento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="cedula_paciente" Type="Int32" />
           <Property Name="fecha_medicamento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="historial_clinico" Relationship="Self.FK_medicamentos_historia_historial" FromRole="medicamentos_historia" ToRole="historial_clinico" />
+          <NavigationProperty Name="medicamentos" Relationship="Self.FK_medicamentos_historia" FromRole="medicamentos_historia" ToRole="medicamentos" />
         </EntityType>
         <EntityType Name="roles">
           <Key>
@@ -173,40 +310,142 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="usuarios" Relationship="Self.FK_usuarios_roles" FromRole="roles" ToRole="usuarios" />
         </EntityType>
         <EntityType Name="servicio_historia">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="codigo_servicio" Type="Int32" />
+          <Property Name="codigo_servicio1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="cedula_paciente" Type="Int32" />
           <Property Name="fecha_servicio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="historial_clinico" Relationship="Self.FK_servicio_historial" FromRole="servicio_historia" ToRole="historial_clinico" />
+          <NavigationProperty Name="servicios" Relationship="Self.FK_servicio_servicio" FromRole="servicio_historia" ToRole="servicios" />
         </EntityType>
         <EntityType Name="servicios">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="codigo_servicio" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="codigo_servicio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="codigo_servicio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nombre_servicio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="valor_costo_servicio" Type="Int32" />
           <Property Name="valor_venta_servicio" Type="Int32" />
+          <NavigationProperty Name="servicio_historia" Relationship="Self.FK_servicio_servicio" FromRole="servicios" ToRole="servicio_historia" />
         </EntityType>
         <EntityType Name="usuarios">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="cedula" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cedula" Type="Int32" />
+          <Property Name="id" Type="Int32" />
+          <Property Name="cedula" Type="Int32" Nullable="false" />
           <Property Name="nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="id_rol" Type="Int32" />
           <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="citas" Relationship="Self.FK_citas_usuarios" FromRole="usuarios" ToRole="citas" />
+          <NavigationProperty Name="historial_clinico" Relationship="Self.FK_historial_usuario" FromRole="usuarios" ToRole="historial_clinico" />
+          <NavigationProperty Name="roles" Relationship="Self.FK_usuarios_roles" FromRole="usuarios" ToRole="roles" />
         </EntityType>
-        <EntityContainer Name="bd_clinicaEntities" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_citas">
+          <End Role="horarios" Type="Self.horarios" Multiplicity="0..1" />
+          <End Role="citas" Type="Self.citas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="horarios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="citas">
+              <PropertyRef Name="id_horario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_citas_usuarios">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="0..1" />
+          <End Role="citas" Type="Self.citas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="citas">
+              <PropertyRef Name="cedula_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_historial_usuario">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="historial_clinico" Type="Self.historial_clinico" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="historial_clinico">
+              <PropertyRef Name="cedula_paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_medicamentos_historia_historial">
+          <End Role="historial_clinico" Type="Self.historial_clinico" Multiplicity="0..1" />
+          <End Role="medicamentos_historia" Type="Self.medicamentos_historia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="historial_clinico">
+              <PropertyRef Name="cedula_paciente" />
+            </Principal>
+            <Dependent Role="medicamentos_historia">
+              <PropertyRef Name="cedula_paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_servicio_historial">
+          <End Role="historial_clinico" Type="Self.historial_clinico" Multiplicity="0..1" />
+          <End Role="servicio_historia" Type="Self.servicio_historia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="historial_clinico">
+              <PropertyRef Name="cedula_paciente" />
+            </Principal>
+            <Dependent Role="servicio_historia">
+              <PropertyRef Name="cedula_paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_medicamentos_historia">
+          <End Role="medicamentos" Type="Self.medicamentos" Multiplicity="0..1" />
+          <End Role="medicamentos_historia" Type="Self.medicamentos_historia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medicamentos">
+              <PropertyRef Name="codigo_medicamento" />
+            </Principal>
+            <Dependent Role="medicamentos_historia">
+              <PropertyRef Name="codigo_medicamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuarios_roles">
+          <End Role="roles" Type="Self.roles" Multiplicity="0..1" />
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="id_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_servicio_servicio">
+          <End Role="servicios" Type="Self.servicios" Multiplicity="0..1" />
+          <End Role="servicio_historia" Type="Self.servicio_historia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="servicios">
+              <PropertyRef Name="codigo_servicio" />
+            </Principal>
+            <Dependent Role="servicio_historia">
+              <PropertyRef Name="codigo_servicio1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bd_clinicaEntities_" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="citas" EntityType="Self.citas" />
           <EntitySet Name="historial_clinico" EntityType="Self.historial_clinico" />
           <EntitySet Name="horarios" EntityType="Self.horarios" />
@@ -216,13 +455,45 @@
           <EntitySet Name="servicio_historia" EntityType="Self.servicio_historia" />
           <EntitySet Name="servicios" EntityType="Self.servicios" />
           <EntitySet Name="usuarios" EntityType="Self.usuarios" />
+          <AssociationSet Name="FK_citas" Association="Self.FK_citas">
+            <End Role="horarios" EntitySet="horarios" />
+            <End Role="citas" EntitySet="citas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_citas_usuarios" Association="Self.FK_citas_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="citas" EntitySet="citas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_historial_usuario" Association="Self.FK_historial_usuario">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="historial_clinico" EntitySet="historial_clinico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_medicamentos_historia_historial" Association="Self.FK_medicamentos_historia_historial">
+            <End Role="historial_clinico" EntitySet="historial_clinico" />
+            <End Role="medicamentos_historia" EntitySet="medicamentos_historia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_servicio_historial" Association="Self.FK_servicio_historial">
+            <End Role="historial_clinico" EntitySet="historial_clinico" />
+            <End Role="servicio_historia" EntitySet="servicio_historia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_medicamentos_historia" Association="Self.FK_medicamentos_historia">
+            <End Role="medicamentos" EntitySet="medicamentos" />
+            <End Role="medicamentos_historia" EntitySet="medicamentos_historia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuarios_roles" Association="Self.FK_usuarios_roles">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_servicio_servicio" Association="Self.FK_servicio_servicio">
+            <End Role="servicios" EntitySet="servicios" />
+            <End Role="servicio_historia" EntitySet="servicio_historia" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="bd_clinicaModelStoreContainer" CdmEntityContainer="bd_clinicaEntities">
+        <EntityContainerMapping StorageEntityContainer="bd_clinicaModelStoreContainer" CdmEntityContainer="bd_clinicaEntities_">
           <EntitySetMapping Name="citas">
             <EntityTypeMapping TypeName="bd_clinicaModel.citas">
               <MappingFragment StoreEntitySet="citas">
@@ -245,6 +516,7 @@
                 <ScalarProperty Name="alergias" ColumnName="alergias" />
                 <ScalarProperty Name="enfermedades_cronicas" ColumnName="enfermedades_cronicas" />
                 <ScalarProperty Name="fecha_novedad" ColumnName="fecha_novedad" />
+                <ScalarProperty Name="motivo_consulta" ColumnName="motivo_consulta" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -262,7 +534,6 @@
           <EntitySetMapping Name="medicamentos">
             <EntityTypeMapping TypeName="bd_clinicaModel.medicamentos">
               <MappingFragment StoreEntitySet="medicamentos">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="codigo_medicamento" ColumnName="codigo_medicamento" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -294,7 +565,7 @@
             <EntityTypeMapping TypeName="bd_clinicaModel.servicio_historia">
               <MappingFragment StoreEntitySet="servicio_historia">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="codigo_servicio" ColumnName="codigo_servicio" />
+                <ScalarProperty Name="codigo_servicio1" ColumnName="codigo_servicio1" />
                 <ScalarProperty Name="cedula_paciente" ColumnName="cedula_paciente" />
                 <ScalarProperty Name="fecha_servicio" ColumnName="fecha_servicio" />
               </MappingFragment>
@@ -303,7 +574,6 @@
           <EntitySetMapping Name="servicios">
             <EntityTypeMapping TypeName="bd_clinicaModel.servicios">
               <MappingFragment StoreEntitySet="servicios">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="codigo_servicio" ColumnName="codigo_servicio" />
                 <ScalarProperty Name="nombre_servicio" ColumnName="nombre_servicio" />
                 <ScalarProperty Name="valor_costo_servicio" ColumnName="valor_costo_servicio" />
@@ -314,7 +584,6 @@
           <EntitySetMapping Name="usuarios">
             <EntityTypeMapping TypeName="bd_clinicaModel.usuarios">
               <MappingFragment StoreEntitySet="usuarios">
-                <ScalarProperty Name="correo" ColumnName="correo" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="cedula" ColumnName="cedula" />
                 <ScalarProperty Name="nombres" ColumnName="nombres" />
@@ -322,6 +591,7 @@
                 <ScalarProperty Name="clave" ColumnName="clave" />
                 <ScalarProperty Name="telefono" ColumnName="telefono" />
                 <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -14,12 +14,18 @@ namespace gestion_de_consulta.Models
     
     public partial class medicamentos
     {
-        public int id { get; set; }
+        public medicamentos()
+        {
+            this.medicamentos_historia = new HashSet<medicamentos_historia>();
+        }
+    
         public string codigo_medicamento { get; set; }
         public string descripcion { get; set; }
         public string nombre { get; set; }
         public Nullable<int> stock { get; set; }
         public Nullable<int> valor_costo_medicamento { get; set; }
         public Nullable<int> precio_publico { get; set; }
+    
+        public virtual ICollection<medicamentos_historia> medicamentos_historia { get; set; }
     }
 }

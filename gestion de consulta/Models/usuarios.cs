@@ -14,13 +14,22 @@ namespace gestion_de_consulta.Models
     
     public partial class usuarios
     {
-        public int id { get; set; }
-        public Nullable<int> cedula { get; set; }
+        public usuarios()
+        {
+            this.citas = new HashSet<citas>();
+        }
+    
+        public Nullable<int> id { get; set; }
+        public int cedula { get; set; }
         public string nombres { get; set; }
         public string apellidos { get; set; }
         public string clave { get; set; }
         public string telefono { get; set; }
         public Nullable<int> id_rol { get; set; }
         public string correo { get; set; }
+    
+        public virtual ICollection<citas> citas { get; set; }
+        public virtual historial_clinico historial_clinico { get; set; }
+        public virtual roles roles { get; set; }
     }
 }

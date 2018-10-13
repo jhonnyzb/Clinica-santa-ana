@@ -4,5 +4,39 @@
     Layout = "~/Views/Shared/_LayoutPaciente.cshtml";
 }
 
-<h2>Paciente</h2>
+<div class="tbod">
+    <form class="form-horizontal" autocomplete="off">
+
+        <fieldset>
+            <!-- Form Name -->
+            <legend>Agenda tu cita</legend>
+            <!-- Text input-->
+            <div class="form-group">
+
+                <div class="col-md-6">
+                    <input id="datepicker" name="textinput" type="text" placeholder="Fecha" class="form-control input-md">
+                    <span class="help-block"></span>
+                </div>
+            </div>
+
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="selectbasic">Selecciona tu hora</label>
+                <div class="col-md-6">
+                    <select id="cboEjemplo" name="selectbasic" class="form-control"></select>
+                </div>
+            </div>
+
+            <!-- Button -->
+            <div class="form-group">
+                <div class="col-md-4">
+                    <button type="button" id="b_agenda" onclick="return AgendarCita()" class="btn btn-info" >Agendar cita</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+
+</div>
+
 

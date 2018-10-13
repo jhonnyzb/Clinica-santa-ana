@@ -1,0 +1,42 @@
+﻿@model gestion_de_consulta.Models.usuarios
+
+
+<div class="container" id="advanced-search-form">
+    <h2>Datos Personales</h2>
+    <form>
+        <div class="form-group">
+            <label for="first-name">Cedula</label>
+            <input type="text" class="form-control" value="@Model.cedula" id="Cedula">
+        </div>
+        <div class="form-group">
+            <label for="last-name">Nombres</label>
+            <input type="text" class="form-control" value="@Model.nombres" id="Nombres">
+        </div>
+        <div class="form-group">
+            <label for="country">Apellidos</label>
+            <input type="text" class="form-control" value="@Model.apellidos" id="Apellidos">
+        </div>
+        <div class="form-group">
+            <label for="number">Telefono</label>
+            <input type="text" class="form-control" value="@Model.telefono" id="Telefono">
+        </div>
+        <div class="form-group">
+            <label for="email">Correo</label>
+            <input type="email" class="form-control" value="@Model.correo" id="Correo">
+        </div>
+        <div class="form-group">
+            <label for="category">Clave</label>
+            <input type="text" class="form-control" value="@Model.clave" id="Clave">
+        </div>
+        <div class="form-group">
+            <label for="education">Confirmar Clave</label>
+            <input type="text" class="form-control" id="C_clave">
+        </div>
+        <div class="clearfix"></div>
+        <button type="button" class="btn btn-success btn-lg btn-responsive" id="B_actualizar" style="margin:0 20px 0 20px;"> <span class="fa fa-save"></span> Actualizar</button>
+        <button type="button" class="btn btn-danger btn-lg btn-responsive" id="B_Cancelar"> <span class="fa fa-close"></span> Cancelar</button>
+    </form>
+</div>
+
+
+

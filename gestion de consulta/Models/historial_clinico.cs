@@ -14,13 +14,24 @@ namespace gestion_de_consulta.Models
     
     public partial class historial_clinico
     {
-        public int id { get; set; }
-        public Nullable<int> cedula_paciente { get; set; }
+        public historial_clinico()
+        {
+            this.medicamentos_historia = new HashSet<medicamentos_historia>();
+            this.servicio_historia = new HashSet<servicio_historia>();
+        }
+    
+        public Nullable<int> id { get; set; }
+        public int cedula_paciente { get; set; }
         public string antecedentes_familiares { get; set; }
         public string antecedentes_personales { get; set; }
         public string cirugias { get; set; }
         public string alergias { get; set; }
         public string enfermedades_cronicas { get; set; }
         public string fecha_novedad { get; set; }
+        public string motivo_consulta { get; set; }
+    
+        public virtual usuarios usuarios { get; set; }
+        public virtual ICollection<medicamentos_historia> medicamentos_historia { get; set; }
+        public virtual ICollection<servicio_historia> servicio_historia { get; set; }
     }
 }

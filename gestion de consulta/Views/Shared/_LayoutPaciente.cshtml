@@ -4,13 +4,11 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/css/all.min.css" rel="stylesheet" />
-    <link href="~/css/dataTables.bootstrap4.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />  
     <link href="~/css/sb-admin.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 </head>
 <body id="page-top">
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
@@ -64,7 +62,7 @@
                     <i class="fa fa-user-circle"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="#">Editar perfil</a>
+                    <a class="dropdown-item" href="#" onclick="return actualizarUsuario(@Session["Ced_usuario"])">Editar perfil</a>
                     <a class="dropdown-item" href="#">Activity Log</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Cerrar sesion</a>
@@ -78,34 +76,43 @@
 
         <!-- Sidebar -->
         <ul class="sidebar navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#" onclick="return  loadData()">
-                    <i class="fa fa-tachometer"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-folder"></i>
-                    <span>Pages</span>
+                    <i class="fa fa-clone"></i>
+                    <span>Agendar Citas</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                    <h6 class="dropdown-header">Login Screens:</h6>
-                    <a class="dropdown-item" href="login.html">Login</a>
-                    <a class="dropdown-item" href="register.html">Register</a>
-                    <a class="dropdown-item" href="forgot-password.html">Forgot Password</a>
+                    <h6 class="dropdown-header">Citas</h6>
+                    <a class="dropdown-item active" href="#" onclick="return agendar()">Consulta externa</a>
+                    <a class="dropdown-item" href="#">Pediatria</a>
+                    <a class="dropdown-item" href="#">Oftalmologia</a>
                     <div class="dropdown-divider"></div>
-                    <h6 class="dropdown-header">Other Pages:</h6>
-                    <a class="dropdown-item" href="404.html">404 Page</a>
-                    <a class="dropdown-item active" href="blank.html">Blank Page</a>
+                    <h6 class="dropdown-header">Otras especialidades</h6>
+                    <a class="dropdown-item" href="#">Ortopedia</a>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fa fa-chart-area"></i>
-                    <span>Charts</span>
+
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-clone"></i>
+                    <span>Documentos En linea</span>
                 </a>
+                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <h6 class="dropdown-header">documentos</h6>
+                    <a class="dropdown-item" href="#">Certificaciones</a>
+                    <a class="dropdown-item" href="#">Afiliaciones</a>
+                    <a class="dropdown-item" href="#">Cartas de desvinculacion</a>
+                    <div class="dropdown-divider"></div>
+                    <h6 class="dropdown-header">Otros documentos</h6>
+                    <a class="dropdown-item" href="#">Reglamento</a>
+                    <a class="dropdown-item active" href="#">Proteccion a datos</a>
+                </div>
             </li>
+
+
+
+
             <li class="nav-item">
                 <a class="nav-link" href="tables.html">
                     <i class="fa fa-table"></i>
@@ -127,9 +134,9 @@
                 <!-- Breadcrumbs-->
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                        <a href="#">Dashboard</a>
+                        <a href="/Paciente/Inicio/">Inicio</a>
                     </li>
-                    <li class="breadcrumb-item active">Blank Page</li>
+                    <li class="breadcrumb-item active"></li>
                 </ol>
 
                 <!-- Page Content -->
@@ -137,7 +144,7 @@
                     @RenderBody()
                 </div>
                 <hr>
-                <p>This is a great starting point for new custom pages.</p>
+                <p>Bienvenidos a la clinica santa su mejor opcion en salup</p>
 
             </div>
             <!-- /.container-fluid -->
@@ -145,7 +152,7 @@
             <footer class="sticky-footer">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright © Your Website 2018</span>
+                        <span>Copyright © tu sitio web 2018</span>
                     </div>
                 </div>
             </footer>
@@ -173,12 +180,11 @@
         </div>
     </div>
 
-
-
-
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <script src="~/Scripts/jquery.easing.min.js"></script>
     <script src="~/Scripts/sb-admin.min.js"></script>
+    <script src="~/Scripts/paciente.js"></script>
 </body>
 </html>

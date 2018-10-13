@@ -14,7 +14,14 @@ namespace gestion_de_consulta.Models
     
     public partial class roles
     {
+        public roles()
+        {
+            this.usuarios = new HashSet<usuarios>();
+        }
+    
         public int id { get; set; }
         public string descripcion { get; set; }
+    
+        public virtual ICollection<usuarios> usuarios { get; set; }
     }
 }

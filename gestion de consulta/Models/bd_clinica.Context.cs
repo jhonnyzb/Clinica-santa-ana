@@ -13,10 +13,10 @@ namespace gestion_de_consulta.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class bd_clinicaEntities : DbContext
+    public partial class bd_clinicaEntities_ : DbContext
     {
-        public bd_clinicaEntities()
-            : base("name=bd_clinicaEntities")
+        public bd_clinicaEntities_()
+            : base("name=bd_clinicaEntities_")
         {
         }
     

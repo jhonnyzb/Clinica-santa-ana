@@ -9,7 +9,7 @@ namespace gestion_de_consulta.AccesoDatos
 {
     public class Acceso_Datos
     {
-        bd_clinicaEntities bdclinica = new bd_clinicaEntities();
+        bd_clinicaEntities_ bdclinica = new bd_clinicaEntities_();
 
 
 

@@ -28,7 +28,9 @@ namespace gestion_de_consulta.Controllers
             if (l_usuario !=null)
             {
                 Session["Nom_usuario"] = l_usuario.nombres;
+                Session["Ced_usuario"] = l_usuario.cedula;
                 v_resultado = l_usuario.id_rol.ToString();
+               
             }
 
             return Json(v_resultado, JsonRequestBehavior.AllowGet);

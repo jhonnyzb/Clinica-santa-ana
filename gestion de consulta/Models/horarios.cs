@@ -14,10 +14,17 @@ namespace gestion_de_consulta.Models
     
     public partial class horarios
     {
+        public horarios()
+        {
+            this.citas = new HashSet<citas>();
+        }
+    
         public int id { get; set; }
         public Nullable<int> cedula_medico { get; set; }
         public string fecha_horario { get; set; }
         public string horario { get; set; }
         public Nullable<int> estado_horario { get; set; }
+    
+        public virtual ICollection<citas> citas { get; set; }
     }
 }
