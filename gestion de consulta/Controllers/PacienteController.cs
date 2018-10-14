@@ -13,6 +13,7 @@ namespace gestion_de_consulta.Controllers
         // GET: Usuario
         public ActionResult Inicio()
         {
+
             AccesoDatosPaciente accpaciente = new AccesoDatosPaciente();
             ViewBag.n_citas = accpaciente.NumeroCitas(((int)Session["Ced_usuario"]));
             return View();   
@@ -30,7 +31,6 @@ namespace gestion_de_consulta.Controllers
         {
             return View();
         }
-
 
 
         public ActionResult V_actualizarDatos(int id)
@@ -63,6 +63,7 @@ namespace gestion_de_consulta.Controllers
         [HttpPost]
         public JsonResult Agendarcita(horarios fecha)
         {
+            
             int ced = ((int)Session["Ced_usuario"]);
             AccesoDatosPaciente accpaciente = new AccesoDatosPaciente();
             var resp = accpaciente.Agendar(fecha,ced);

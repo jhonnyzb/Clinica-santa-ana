@@ -38,6 +38,17 @@ namespace gestion_de_consulta.Controllers
 
 
 
+        [HttpPost]
+        public JsonResult Recuperar_(usuarios usuario)
+        {
+            Acceso_Datos accrecuperar = new Acceso_Datos();
+            string respuesta = accrecuperar.Recuperar_contraseña(usuario.correo);
+
+            return Json(respuesta, JsonRequestBehavior.AllowGet);
+        }
+
+
+
         public ActionResult Cerrar_sesion()
         {
             Session.Clear();

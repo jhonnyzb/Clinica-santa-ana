@@ -46,7 +46,7 @@
             }
         },
         error: function (errormessage) {
-            alert(errormessage.responseText);
+            alert("upps ha ocurrido el siguiente error: " + errormessage.responseText);
         }
     });
 }
