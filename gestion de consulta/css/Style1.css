@@ -5,11 +5,10 @@ body {
 
 #advanced-search-form {
     background-color: #fff;
-    max-width: 800px;
-    margin: 160px auto 0;
-    padding: 40px;
+    max-width: 900px;
+    padding: 10px;
     color: #858b8e;
-    box-shadow: 6px 6px 6px rgba(0,0,0,0.2);
+    box-shadow: 6px 6px 6px 6px rgb(128, 128, 128);
 }
 
     #advanced-search-form h2 {
@@ -52,7 +51,7 @@ body {
     }
 
     #advanced-search-form .btn {
-        width: 46%;
+        width: 20%;
         margin: 20px auto 0;
         display: block;
         outline: none;

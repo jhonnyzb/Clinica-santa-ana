@@ -1,12 +1,12 @@
 ﻿@model gestion_de_consulta.Models.usuarios
 
-
+<link href="~/css/Style1.css" rel="stylesheet" />
 <div class="container" id="advanced-search-form">
     <h2>Datos Personales</h2>
     <form>
         <div class="form-group">
             <label for="first-name">Cedula</label>
-            <input type="text" class="form-control" value="@Model.cedula" id="Cedula">
+            <input type="text" class="form-control" value="@Model.cedula" id="Cedula" disabled>
         </div>
         <div class="form-group">
             <label for="last-name">Nombres</label>
@@ -33,8 +33,10 @@
             <input type="text" class="form-control" id="C_clave">
         </div>
         <div class="clearfix"></div>
-        <button type="button" class="btn btn-success btn-lg btn-responsive" id="B_actualizar" style="margin:0 20px 0 20px;"> <span class="fa fa-save"></span> Actualizar</button>
-        <button type="button" class="btn btn-danger btn-lg btn-responsive" id="B_Cancelar"> <span class="fa fa-close"></span> Cancelar</button>
+        <div class="row">
+            <button type="button" onclick="return ActualizarUsuario()" class="btn btn-success" id="B_actualizar">Actualizar</button>
+            <button type="button" onclick="return Inicio()" class="btn btn-danger" id="B_Cancelar">Cancelar</button>
+        </div>
     </form>
 </div>
 

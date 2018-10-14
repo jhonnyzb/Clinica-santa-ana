@@ -13,7 +13,9 @@ namespace gestion_de_consulta.Controllers
         // GET: Usuario
         public ActionResult Inicio()
         {
-                return View();   
+            AccesoDatosPaciente accpaciente = new AccesoDatosPaciente();
+            ViewBag.n_citas = accpaciente.NumeroCitas(((int)Session["Ced_usuario"]));
+            return View();   
         }
 
 
@@ -49,13 +51,13 @@ namespace gestion_de_consulta.Controllers
         }
 
 
-
-        public ActionResult Agendar()
+        [HttpPost]
+        public JsonResult ActualizarUsuario(usuarios usuario)
         {
-            return PartialView("AgendaCitas");
+            AccesoDatosPaciente accpaciente = new AccesoDatosPaciente();
+            var v_respuesta = accpaciente.ActualizarUsuario(usuario);
+            return Json(v_respuesta, JsonRequestBehavior.AllowGet);
         }
-
-
 
 
         [HttpPost]

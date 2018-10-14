@@ -1,5 +1,5 @@
 ﻿
-function agendar() {
+function Inicio() {
  window.location.href = "/Paciente/Inicio";
 }
 
@@ -41,7 +41,7 @@ $(function () {
     });
 });
 
-function actualizarUsuario(id) {
+function ObtenerUsuario(id) {
     $.ajax({
         url: "/Paciente/V_actualizarDatos/" + id,
         type: "GET",
@@ -90,7 +90,40 @@ function AgendarCita() {
     });
 }
 
-
+function ActualizarUsuario() {
+    var res = validateActualizarUsuario();
+    if (res == false) {
+        return false;
+    }
+    var empObj = {
+        cedula: $('#Cedula').val(),
+        nombres: $('#Nombres').val(),
+        apellidos: $('#Apellidos').val(),
+        telefono: $('#Telefono').val(),
+        correo: $('#Correo').val(),
+        clave: $('#Clave').val(),
+    };
+    $.ajax({
+        url: "/Paciente/ActualizarUsuario",
+        data: JSON.stringify(empObj),
+        type: "POST",
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            swal({
+                title: "Datos Actualizados",
+                text: "",
+                icon: "success",
+                button: "Aceptar",
+            }).then(function (isConfirm) {
+                Inicio();
+            })
+        },
+        error: function (errormessage) {
+            alert(errormessage.responseText);
+        }
+    });
+}
 
 
 function Add() {
@@ -150,6 +183,62 @@ function validateFormCita() {
     if ($('#cboEjemplo').val().trim() == "") {
         isValid = false;
     }
+    return isValid;
+}
+
+function validateActualizarUsuario() {
+    var email = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    var cedula = /^[0-9]{6,10}$/;
+    var nombres = /^[a-zA-Z\s]+$/;
+
+    var isValid = true;
+
+    if (!cedula.test($('#Telefono').val())) {
+        $('#Telefono').css('border-color', 'Red');
+        isValid = false;
+    }
+    else {
+        $('#Telefono').css('border-color', 'lightgrey');
+    }
+
+    if ($('#Clave').val().trim() == "") {
+        $('#Clave').css('border-color', 'Red');
+        isValid = false;
+    }
+    else {
+        $('#Clave').css('border-color', 'lightgrey');
+    }
+    if (!nombres.test($('#Nombres').val())) {
+        $('#Nombres').css('border-color', 'Red');
+        isValid = false;
+    }
+    else {
+        $('#Nombres').css('border-color', 'lightgrey');
+    }
+    if (!nombres.test($('#Apellidos').val())) {
+        $('#Apellidos').css('border-color', 'Red');
+        isValid = false;
+    }
+    else {
+        $('#Apellidos').css('border-color', 'lightgrey');
+    }
+
+    if (!email.test($('#Correo').val())) {
+        $('#Correo').css('border-color', 'Red');
+        isValid = false;
+    }
+    else {
+        $('#Correo').css('border-color', 'lightgrey');
+    }
+
+    if ($('#C_clave').val().trim() == "") {
+        $('#C_clave').css('border-color', 'Red');
+        isValid = false;
+    }
+    else {
+        $('#C_clave').css('border-color', 'lightgrey');
+    }
+
     return isValid;
 }
 

@@ -24,7 +24,6 @@ namespace gestion_de_consulta.AccesoDatos
         }
 
 
-
         public IQueryable Horarios(horarios fecha)
         {
             var query = from c in bdclinica.horarios
@@ -64,6 +63,24 @@ namespace gestion_de_consulta.AccesoDatos
         }
 
 
+        public int ActualizarUsuario(usuarios usuario)
+        {
+            usuarios u = bdclinica.usuarios.Find(usuario.cedula);
+            u.nombres = usuario.nombres;
+            u.apellidos = usuario.apellidos;
+            u.clave = usuario.clave;
+            u.telefono = usuario.telefono;
+            u.correo = usuario.correo;
+            bdclinica.SaveChanges();
+            return 1;
+        }
+
+        public int NumeroCitas(int cedula)
+        {
+            int NumeroCitas = bdclinica.citas.Count(x=>x.cedula_usuario==cedula);
+
+            return NumeroCitas;
+        }
 
     }
 }
