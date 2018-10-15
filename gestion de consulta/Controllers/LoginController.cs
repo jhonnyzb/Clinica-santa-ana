@@ -27,7 +27,7 @@ namespace gestion_de_consulta.Controllers
             string v_resultado = "no existe";
             if (l_usuario !=null)
             {
-                Session["Nom_usuario"] = l_usuario.nombres;
+                Session["Nom_usuario"] = l_usuario.nombres + " " + l_usuario.apellidos;
                 Session["Ced_usuario"] = l_usuario.cedula;
                 v_resultado = l_usuario.id_rol.ToString();
                

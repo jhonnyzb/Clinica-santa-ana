@@ -20,7 +20,7 @@ namespace gestion_de_consulta.Models
             this.servicio_historia = new HashSet<servicio_historia>();
         }
     
-        public Nullable<int> id { get; set; }
+        public int id { get; set; }
         public int cedula_paciente { get; set; }
         public string antecedentes_familiares { get; set; }
         public string antecedentes_personales { get; set; }

@@ -19,7 +19,7 @@ namespace gestion_de_consulta.Models
         public Nullable<int> cedula_paciente { get; set; }
         public string fecha_servicio { get; set; }
     
-        public virtual historial_clinico historial_clinico { get; set; }
         public virtual servicios servicios { get; set; }
+        public virtual historial_clinico historial_clinico { get; set; }
     }
 }

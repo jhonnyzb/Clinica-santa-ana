@@ -11106,7 +11106,7 @@
                  *      } );
                  *    } );
                  */
-                "sEmptyTable": "No hay empleados registrados",
+                "sEmptyTable": "No hay registros en el sistema",
 
 
                 /**

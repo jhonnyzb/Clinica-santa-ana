@@ -28,8 +28,8 @@ namespace gestion_de_consulta.Models
         public Nullable<int> id_rol { get; set; }
         public string correo { get; set; }
     
-        public virtual historial_clinico historial_clinico { get; set; }
         public virtual roles roles { get; set; }
         public virtual ICollection<citas> citas { get; set; }
+        public virtual historial_clinico historial_clinico { get; set; }
     }
 }

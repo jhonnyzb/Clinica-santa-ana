@@ -28,6 +28,14 @@ namespace gestion_de_consulta.Controllers
             return PartialView("CitasMedico", CitasM);
         }
 
+        [HttpGet]
+        public ActionResult ConsultarHistorial()
+        {
+
+            AccesoDatosMedico accdatosmedico = new AccesoDatosMedico();
+            var Historiales = accdatosmedico.ConsultarHistoriales();
+            return PartialView("HistorialesClinicos", Historiales);
+        }
 
 
     }

@@ -25,7 +25,6 @@ namespace gestion_de_consulta.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<historial_clinico> historial_clinico { get; set; }
         public DbSet<horarios> horarios { get; set; }
         public DbSet<medicamentos> medicamentos { get; set; }
         public DbSet<medicamentos_historia> medicamentos_historia { get; set; }
@@ -34,5 +33,6 @@ namespace gestion_de_consulta.Models
         public DbSet<servicios> servicios { get; set; }
         public DbSet<usuarios> usuarios { get; set; }
         public DbSet<citas> citas { get; set; }
+        public DbSet<historial_clinico> historial_clinico { get; set; }
     }
 }

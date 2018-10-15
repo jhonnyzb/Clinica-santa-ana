@@ -9,13 +9,13 @@ namespace gestion_de_consulta.AccesoDatos
     public class AccesoDatosMedico
     {
 
-        public List<CitasMedico> Consultar(int CedulaMedico)
+        public List<ConsultasGenerales> Consultar(int CedulaMedico)
 
         {
             using (bd_clinicaEntities_ bdclinica = new bd_clinicaEntities_())
             {
 
-                var citas = bdclinica.citas.Include("usuarios").Include("horarios").Where(f => f.cedula_medico == CedulaMedico && f.estado_cita == 1).Select(x => new CitasMedico()
+                var citas = bdclinica.citas.Include("usuarios").Include("horarios").Where(f => f.cedula_medico == CedulaMedico && f.estado_cita == 1).Select(x => new ConsultasGenerales()
                 {
                     Fecha = x.horarios.fecha_horario,
                     Hora = x.horarios.horario,
@@ -38,6 +38,24 @@ namespace gestion_de_consulta.AccesoDatos
             }
         }
 
+        public List<ConsultasGenerales> ConsultarHistoriales()
+
+        {
+            using (bd_clinicaEntities_ bdclinica = new bd_clinicaEntities_())
+            {
+
+                var historiales = bdclinica.historial_clinico.Include("usuarios").Select(x => new ConsultasGenerales()
+                {
+                    Fecha = x.fecha_novedad,
+                    Identificacion = x.cedula_paciente,
+                    Nombres = x.usuarios.nombres,
+                    Apellidos =x.usuarios.apellidos
+
+                });
+
+                return historiales.ToList();
+            }
+        }
 
     }
 }

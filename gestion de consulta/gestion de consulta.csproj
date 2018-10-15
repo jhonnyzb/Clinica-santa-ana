@@ -225,7 +225,7 @@
     <Compile Include="Models\citas.cs">
       <DependentUpon>bd_clinica.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CitasMedico.cs" />
+    <Compile Include="Models\ConsultasGenerales.cs" />
     <Compile Include="Models\historial_clinico.cs">
       <DependentUpon>bd_clinica.tt</DependentUpon>
     </Compile>
@@ -270,6 +270,7 @@
     <Content Include="Views\Administrador\Inicio.cshtml" />
     <Content Include="Views\Paciente\ActualizarDatos.cshtml" />
     <Content Include="Views\Medico\CitasMedico.cshtml" />
+    <Content Include="Views\Medico\HistorialesClinicos.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

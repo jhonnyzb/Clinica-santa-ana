@@ -64,7 +64,8 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="#" onclick="return ObtenerUsuario(@Session["Ced_usuario"])">Editar perfil</a>
-                    <a class="dropdown-item" href="#">Activity Log</a>
+                    <a class="dropdown-item"> @Session["Nom_usuario"]</a>
+                    <a class="dropdown-item">CC : @Session["Ced_usuario"]</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Cerrar sesion</a>
                 </div>
