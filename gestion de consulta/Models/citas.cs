@@ -18,7 +18,7 @@ namespace gestion_de_consulta.Models
         public Nullable<int> cedula_usuario { get; set; }
         public Nullable<int> id_horario { get; set; }
         public Nullable<int> estado_cita { get; set; }
-        public string medico { get; set; }
+        public Nullable<int> cedula_medico { get; set; }
     
         public virtual horarios horarios { get; set; }
         public virtual usuarios usuarios { get; set; }
