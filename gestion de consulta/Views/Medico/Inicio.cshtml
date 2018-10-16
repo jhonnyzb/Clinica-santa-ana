@@ -6,6 +6,71 @@
 
 <div class="card mb-3 tbod">
     <h1>medico</h1>
+</div>
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">×</span></button>*@
+                <label style="color:red">REGISTRO DE HISTORIAL CLINICO</label>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body">
+                <form>
 
+                    <div class="form-group">
+                        <label for="EmployeeId">Antecedentes familiares</label>
+                        <input type="text" value="No registra" class="form-control" id="AnteF" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Name">Antecedentes personales</label>
+                        <input type="text" value="No registra" class="form-control" id="AnteP" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Age">Cirugias</label>
+                        <input type="text" value="No registra" class="form-control" id="Cirugias" />
+                    </div>
+                    <div class="form-group">
+                        <label for="State">Enfermedades Cronicas</label>
+                        <input type="text" value="No registra" class="form-control" id="EnferC" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Country">Motivo Consulta</label>
+                        <input type="text" class="form-control" id="MotivoC" />
+                    </div>
+                    <div class="form-group">
+                        <label for="Country">Diagnostico</label>
+                        <input type="text" class="form-control" id="Diag"  />
+                    </div>
+
+                    <div class="form-group text-center">
+                        <button type="button" class="btn btn-primary" onclick="return GuardarHistorial()" >Guardar</button>
+                        <button type="button" class="btn btn-danger" style="margin-left:20px">Cancelar</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="Country">Medicamentos</label>
+                        <select id="combomedicamento" name="selectmedic" class="form-control"></select>
+                        <label for="Country">Cantidad</label>
+                        <input type="text" class="form-control" id="CantMe" /><br />
+                        <button type="button" class="btn btn-success" disabled  onclick="return GuardarMedicamentos()">Agregar</button>
+                        <button type="button" class="btn btn-primary" disabled >Medicar</button>
+                        <button type="button" class="btn btn-danger" style="display:none;">Imprimir</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="Country">Examenes</label>
+                        <select id="comboexamenes" name="selectbasic" class="form-control"></select><br />
+                        <button type="button" class="btn btn-success" disabled >Agregar</button>
+                        <button type="button" class="btn btn-primary" disabled >Ordenar</button>
+                        <button type="button" class="btn btn-danger" style="display:none;">Imprimir</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;">Actualizar</button>*@
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
 </div>

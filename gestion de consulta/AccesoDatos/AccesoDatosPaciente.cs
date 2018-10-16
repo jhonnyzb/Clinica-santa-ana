@@ -30,8 +30,8 @@ namespace gestion_de_consulta.AccesoDatos
 
         public IQueryable Horarios(horarios fecha)
         {
-            using (bd_clinicaEntities_ bdclinica = new bd_clinicaEntities_())
-            {
+            bd_clinicaEntities_ bdclinica = new bd_clinicaEntities_();
+            
                 var query = from c in bdclinica.horarios
                             where c.estado_horario == 1 && c.fecha_horario == fecha.fecha_horario
                             select new
@@ -40,9 +40,8 @@ namespace gestion_de_consulta.AccesoDatos
                                 Nombre = c.horario
                             };
 
-
                 return query;
-            }
+            
         }
 
         public string Agendar(horarios h, int cedula)

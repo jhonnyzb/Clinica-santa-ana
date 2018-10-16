@@ -24,10 +24,10 @@
           <Property Name="antecedentes_familiares" Type="text" />
           <Property Name="antecedentes_personales" Type="text" />
           <Property Name="cirugias" Type="text" />
-          <Property Name="alergias" Type="text" />
           <Property Name="enfermedades_cronicas" Type="text" />
           <Property Name="fecha_novedad" Type="varchar" MaxLength="50" />
           <Property Name="motivo_consulta" Type="text" />
+          <Property Name="diagnostico" Type="text" />
         </EntityType>
         <EntityType Name="horarios">
           <Key>
@@ -397,7 +397,7 @@
             <End Role="historial_clinico" EntitySet="historial_clinico" />
             <End Role="servicio_historia" EntitySet="servicio_historia" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="citas">
           <Key>
             <PropertyRef Name="id" />
@@ -443,10 +443,10 @@
           <Property Name="antecedentes_familiares" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="antecedentes_personales" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="cirugias" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
-          <Property Name="alergias" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="enfermedades_cronicas" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="fecha_novedad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="motivo_consulta" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="diagnostico" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="usuarios" Relationship="bd_clinicaModel.FK_historial_usuario" FromRole="historial_clinico" ToRole="usuarios" />
           <NavigationProperty Name="medicamentos_historia" Relationship="bd_clinicaModel.FK_medicamentos_historia_historial" FromRole="historial_clinico" ToRole="medicamentos_historia" />
           <NavigationProperty Name="servicio_historia" Relationship="bd_clinicaModel.FK_servicio_historial" FromRole="historial_clinico" ToRole="servicio_historia" />
@@ -487,7 +487,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -582,10 +582,10 @@
           <EntitySetMapping Name="historial_clinico">
             <EntityTypeMapping TypeName="bd_clinicaModel.historial_clinico">
               <MappingFragment StoreEntitySet="historial_clinico">
+                <ScalarProperty Name="diagnostico" ColumnName="diagnostico" />
                 <ScalarProperty Name="motivo_consulta" ColumnName="motivo_consulta" />
                 <ScalarProperty Name="fecha_novedad" ColumnName="fecha_novedad" />
                 <ScalarProperty Name="enfermedades_cronicas" ColumnName="enfermedades_cronicas" />
-                <ScalarProperty Name="alergias" ColumnName="alergias" />
                 <ScalarProperty Name="cirugias" ColumnName="cirugias" />
                 <ScalarProperty Name="antecedentes_personales" ColumnName="antecedentes_personales" />
                 <ScalarProperty Name="antecedentes_familiares" ColumnName="antecedentes_familiares" />

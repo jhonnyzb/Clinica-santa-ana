@@ -66,7 +66,6 @@ function AgendarCita() {
         fecha_horario: $('#datepicker').val(),
         horario: $('select[name="selectbasic"] option:selected').text() 
     };
-
     $.ajax({
         url: "/Paciente/Agendarcita",
         data: JSON.stringify(empObj),

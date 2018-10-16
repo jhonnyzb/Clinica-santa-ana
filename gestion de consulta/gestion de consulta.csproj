@@ -271,6 +271,7 @@
     <Content Include="Views\Paciente\ActualizarDatos.cshtml" />
     <Content Include="Views\Medico\CitasMedico.cshtml" />
     <Content Include="Views\Medico\HistorialesClinicos.cshtml" />
+    <Content Include="Views\Medico\HistorialClinico1.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

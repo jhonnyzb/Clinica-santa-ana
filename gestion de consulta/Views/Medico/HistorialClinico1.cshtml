@@ -1,0 +1,63 @@
+﻿@model IEnumerable<gestion_de_consulta.Models.ConsultasGenerales>
+
+
+<div class="card-header">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Agregar registro clinico</button>
+</div>
+<div>
+    <div class="table-responsive">
+        <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fecha)
+
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Identificacion)
+
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Motivo_Consulta)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Diagnostico)
+                    </th>
+                    <th>
+                        Accion
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fecha)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Identificacion)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Motivo_Consulta)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Diagnostico)
+                        </td>
+                        <td>
+                            <a href="#" class="fa fa-vcard" style="color:blue"> Detalles</a>
+                            <a href="#" class="fa fa-vcard" style="color:forestgreen"> Modificar</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="~/Scripts/jquery.dataTables.js"></script>
+<script src="~/Scripts/dataTables.bootstrap4.js"></script>
+<script src="~/Scripts/datatables-demo.js"></script>
+<script src="~/Scripts/medico.js"></script>

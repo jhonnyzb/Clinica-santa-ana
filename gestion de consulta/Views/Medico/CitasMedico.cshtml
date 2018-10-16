@@ -43,7 +43,7 @@
                         @Html.DisplayFor(modelItem => item.Nombres)
                     </td>
                     <td>
-                        <a href="#" class="fa fa-vcard" style="color:blue"> Historial Clinico</a>
+                        <a href="#" class="fa fa-vcard" style="color:blue" onclick="return  HistorialClinico1(@Html.DisplayFor(modelItem => item.Identificacion))"> Historial Clinico</a>
                     </td>
                 </tr>
                 }
@@ -55,4 +55,4 @@
 <script src="~/Scripts/jquery.dataTables.js"></script>
 <script src="~/Scripts/dataTables.bootstrap4.js"></script>
 <script src="~/Scripts/datatables-demo.js"></script>
-
+<script src="~/Scripts/medico.js"></script>

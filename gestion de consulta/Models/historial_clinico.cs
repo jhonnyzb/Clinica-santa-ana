@@ -25,10 +25,10 @@ namespace gestion_de_consulta.Models
         public string antecedentes_familiares { get; set; }
         public string antecedentes_personales { get; set; }
         public string cirugias { get; set; }
-        public string alergias { get; set; }
         public string enfermedades_cronicas { get; set; }
         public string fecha_novedad { get; set; }
         public string motivo_consulta { get; set; }
+        public string diagnostico { get; set; }
     
         public virtual usuarios usuarios { get; set; }
         public virtual ICollection<medicamentos_historia> medicamentos_historia { get; set; }
